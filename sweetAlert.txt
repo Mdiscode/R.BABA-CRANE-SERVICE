@@ -1,0 +1,34 @@
+async function deletecmp(cmpid) {
+  // Show confirmation dialog
+  let deleteConfirm = await swal({
+      title: "Are you sure?",
+      text: "You won't be able to revert this action!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+  });
+
+  if (deleteConfirm) { // If user confirms deletion
+      try {
+          let response = await fetch(`/api/apicompany/${cmpid}`, {
+              method: "DELETE",
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          });
+
+          let result = await response.json();
+          console.log(result);
+
+          // Show success message & reload page
+          await swal("Deleted!", "The company has been deleted.", "success");
+          window.location.href = "http://127.0.0.1:8000/company/viewCompany";
+
+      } catch (error) {
+          console.error("Error deleting company:", error);
+          swal("Error!", "Something went wrong.", "error");
+      }
+  } else {
+      swal("Cancelled", "Your data is safe!", "info");
+  }
+}
