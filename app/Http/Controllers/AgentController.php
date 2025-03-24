@@ -34,6 +34,7 @@ class AgentController extends Controller
             'name'=>'required|string|min:3',
         ]);
         $user = User::find(Auth::user()->id);
+    
         $user->name       =trim($request->name);
         $user->username   =trim($request->username);
         $user->email      =trim($request->email);
@@ -62,10 +63,10 @@ class AgentController extends Controller
             $user->website    =trim($request->website);
        
         if( $user->save()){
-            return redirect('agent/agent_profile')->with('success','Profile Update Successfully..');
+            return redirect(route('agent_profile'))->with('success','Profile Update Successfully..');
        
         }else{
-            return redirect('agent/agent_profile')->with('error','Profile Not Update Successfully..');
+            return redirect(route('agent.dashboard'))->with('error','Profile Not Update Successfully..');
        
         } 
     }

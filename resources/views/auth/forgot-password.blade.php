@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4 gap-8">
-            <a href="#" class="btn btn-primary">Cancle</a>
+            <a href="{{route('user.home')}}" class="btn bg-slate-800 text-white p-1 rounded-lg">Cancle</a>
             <x-primary-button>
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>

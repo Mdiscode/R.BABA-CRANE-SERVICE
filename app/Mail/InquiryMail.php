@@ -34,7 +34,7 @@ class InquiryMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Compose Email Mail',
+            subject: 'Enquiry Email Mail',
         );
         // return $this->from($this->inquiry['email']) // User's email as sender
         // ->to('israrshekh.code22@gmail.com') // Admin email

@@ -11,26 +11,24 @@
 
     {{-- Services List --}}
     <div class="container mx-auto px-4 lg:px-20">
-
+    @foreach ($servicesValue as $value)
         {{-- Hydra Crane Services --}}
         <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
             <div class="w-full lg:w-1/2">
-                <img class="w-full h-60 object-cover rounded-lg" src="{{asset('homeimg/slide4.jpg')}}" alt="Hydra Crane">
+                <img class="w-full h-60 object-cover rounded-lg" src="{{asset('serviceimg/'.$value->image)}}" alt="Hydra Crane">
             </div>
             <div class="w-full lg:w-1/2 p-4">
-                <h2 class="text-gray-900 font-bold text-xl">CRANE SERVICES</h2>
+                <h2 class="text-gray-900 font-bold text-xl">{{$value->title}}</h2>
                 <p class="text-gray-700 mt-2">
-                    At R. Baba Crane Service, we provide reliable and efficient 
-                    <strong>Hydra crane services</strong> for all types of heavy lifting needs. 
-                    Whether it's <strong>loading, unloading, or transporting</strong> heavy materials, 
-                    our well-maintained Hydra cranes and skilled operators ensure 
-                    smooth, safe, and efficient operations.
+                    {!!$value->description!!}
                 </p>
             </div>
         </div>
+    @endforeach
+        
 
         {{-- Farana Crane Services --}}
-        <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
+        {{-- <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
             <div class="w-full lg:w-1/2">
                 <img class="w-full h-60 object-cover rounded-lg" src="{{asset('homeimg/farana1.jpg')}}" alt="Farana Crane">
             </div>
@@ -44,10 +42,10 @@
                     smooth, safe, and efficient operations.
                 </p>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Towing Services --}}
-        <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
+        {{-- <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
             <div class="w-full lg:w-1/2">
                 <img class="w-full h-60 object-cover rounded-lg" src="{{asset('homeimg/tow3.jpg')}}" alt="Towing Services">
             </div>
@@ -61,12 +59,12 @@
                     safe, smooth, and timely service.
                 </p>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Forklift Services --}}
-        <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
+        {{-- <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
             <div class="w-full lg:w-1/2">
-                <img class="w-full h-60 object-cover rounded-lg" src="{{asset('slider/slide1.jpg')}}" alt="Forklift Services">
+                <img class="w-full h-60 object-cover rounded-lg" src="{{asset('slider/forkillift.jpg')}}" alt="Forklift Services">
             </div>
             <div class="w-full lg:w-1/2 p-4">
                 <h2 class="text-gray-900 font-bold text-xl">FORKLIFT SERVICES</h2>
@@ -77,10 +75,10 @@
                     skilled operators ensure smooth and safe operations.
                 </p>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Mobile Crane Services --}}
-        <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
+        {{-- <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
             <div class="w-full lg:w-1/2">
                 <img class="w-full h-60 object-cover rounded-lg" src="{{asset('homeimg/mobilecrane.jpg')}}" alt="Mobile Crane">
             </div>
@@ -94,7 +92,7 @@
                     safe, smooth, and efficient operations at any location.
                 </p>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </section>

@@ -13,13 +13,17 @@ use App\Mail\InquiryMail;
 use App\Models\Locksheet;
 use App\Models\User;
 use PDF;
+use App\Models\Operator;
 // use Barryvdh\DomPDF\Facade as PDF;
 class UserController extends Controller
 {
     public function userHome(){
         $cardData = CardContent::all();
-        // print_r($card);
-        return view('userUi.home',compact("cardData"));
+        // get staff count;
+         $staff = Operator::count();
+         //get users count 
+         $usercount = User::count();
+        return view('userUi.home',compact("cardData",'staff','usercount'));
     }
     //delete  user data
     public function deleteRoleData($id){

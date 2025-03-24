@@ -115,17 +115,24 @@
 
   <div class="bg-white mx-w-lg sm:w-[40rem] rounded-lg shadow-lg px-0 py-0 relative">
     <!-- Modal Header -->
-    <button id="closeinquiryModel" class="text-gray-500 hover:text-gray-700 absolute top-0 right-6" 
+    <button id="closeinquiryModel" class="text-gray-500 hover:text-gray-700 absolute -top-3.5 right-2 " 
       style="font-size:2.5rem;">&times;
     </button>
 
     <!-- Modal Body -->
     <div class="text-gray-600 flex w-full h-full justify-center">
         <div class="max-w-full sm:w-[38rem] p-6 bg-white rounded-lg shadow-md">
-            <div class="w-full text-center mb-10">
+            <div class="w-full text-center mb-8 mt-6">
               <p class="text-2xl sm:text-lg font-bold text-center text-gray-700">Enter Requirement Details</p>
             </div>
-
+             <div class="mb-2 sm:flex gap-2 sm:gap-1 sm:flex-row">
+              <button class="p-1 bg-gray-500 text-white rounded-lg" onclick="document.getElementById('inquiryInput').value='Hydra Service';">Hydra</button>
+              <button class="p-1 bg-gray-500 text-white rounded-lg" onclick="document.getElementById('inquiryInput').value='Farana Service'; ">Farana</button>
+              <button class="p-1 bg-gray-500 text-white rounded-lg" onclick="document.getElementById('inquiryInput').value='Towing Service'; ">Towing</button> 
+              <button class="p-1 bg-gray-500 text-white rounded-lg" onclick="document.getElementById('inquiryInput').value='Forkillift Service'; ">Forkillift</button>
+              <br class="flex sm:hidden ">
+              <button class="p-1 bg-gray-500 text-white rounded-lg mt-2 sm:mt-0" onclick="document.getElementById('inquiryInput').value='Mobile crane Service'; ">Mobile crane</button>
+             </div>
             <form id="inquiryForm" method="post" action="{{ route('user.inquiry') }}">
                 @csrf
 

@@ -43,8 +43,14 @@
         <div class="mt-4">
             <label for="role" class="form-label">Role</label>
                 <select name="role" id="" class="form-control">
-                    <option value="{{$roles[0]}}">{{$roles[0]}}</option>
-                    <option value="{{$roles[1]}}">{{$roles[1]}}</option>
+                    @foreach ($roles as $role)
+                    {{-- @if ($role == 'user' || $role == 'agent') --}}
+                    <option value="{{$role}}">{{$role}}</option>
+                    {{-- @endif --}}
+                    
+                    @endforeach
+                    
+                    {{-- <option value="{{$roles[1]}}">{{$roles[1]}}</option> --}}
                 </select>
         </div>
 

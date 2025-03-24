@@ -9,6 +9,7 @@ use App\Http\controllers\UpdateController;
 use App\Http\controllers\EmailController;
 use App\Http\controllers\OperatorController;
 use App\Http\controllers\CompanyController;
+use App\Http\controllers\ServiceController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -110,8 +111,24 @@ Route::controller(UserController::class)->group(function(){
   // Route::get('user/inquiry_detail','user_inquiry_detail')->name('user.inquiry_detail');
   //pdf
   Route::get('pdf_generator','download_pdf')->name('pdf_generator');
+  //---contactUs---
+Route::post('user/contactUs','contactUs')->name('user.contactUs');
 });
 //---USER-CONTROLLER---END------
+
+//---SIDE--CONTROLLER----START---
+Route::controller(ServiceController::class)->group(function(){
+  Route::get('admin/service','Add_service')->name('admin.service');
+  Route::post('admin/add_service','AddServices_Data')->name('Add_Services');
+  Route::post('admin/update_service','UpdateServices')->name('update_Services');
+  Route::get('admin/deleteService/{id}','delete_Services')->name('deleteservice');
+  //About--
+  Route::get('admin/About','get_about_data')->name('admin.about_list');
+  Route::post('admin/updateAbout','Update_about')->name('update_About');
+
+});
+
+//---SIDE--CONTROLLER----END-----
 });  //end middleware
 
 
@@ -137,14 +154,15 @@ Route::middleware(['auth','role:user'])->group(function(){
 });
 Route::controller(UserController::class)->group(function(){
   Route::get('/','userHome')->name('user.home');
-  
   Route::post('user/inquiry',"User_inquiry")->name('user.inquiry');
-
 });
 Route::view('user/raiting','userUi.raiting');
-Route::view('user/about','userUi/about')->name('user.about');
-Route::view('user/services','userUi/services')->name('user.services');
+
 Route::view('locksheet','myPDF');
+
+//----services--page---
+Route::get('user/services',[ServiceController::class,'get_services'])->name('user.services');
+Route::get('user/about',[ServiceController::class,'get_About'])->name('user.about');
 // Route::view('register2','userUi/userRegister');
 //---END--USER--CONTROLLER---------
 
@@ -157,7 +175,6 @@ Route::view('locksheet','myPDF');
 //     });
 // });
 
-//---contactUs---
-Route::post('user/contactUs',[UserController::class,'contactUs'])->name('user.contactUs');
+
 
 

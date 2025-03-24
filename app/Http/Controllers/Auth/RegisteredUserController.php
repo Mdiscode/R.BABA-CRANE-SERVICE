@@ -19,11 +19,13 @@ class RegisteredUserController extends Controller
      * Display the registration view.
      */
     public function create(): View
-{
-    $roles = User::pluck('role')->unique();
+    {
+        $roles = User::whereIn('role', ['user', 'agent']) // Filter roles
+                     ->pluck('role') // Get only role names
+                     ->unique(); // Remove duplicates
     
-    return view('auth.register', compact('roles'));
-}
+        return view('auth.register', compact('roles'));
+    }
 
     /**
      * Handle an incoming registration request.

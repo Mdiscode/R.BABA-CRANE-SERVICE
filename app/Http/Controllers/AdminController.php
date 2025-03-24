@@ -13,6 +13,7 @@ use Str;
 use Illuminate\Support\Facades\Storage;
 use File;
 use App\Models\Inquiry;
+use App\Models\Operator;
 // use Illuminate\Support\Facades\File;
 use App\Models\ComposeEmail;
 class AdminController extends Controller
@@ -26,7 +27,11 @@ class AdminController extends Controller
 
           //get inquiry--details
           $inquiry = Inquiry::get();
-        return view('admin.index',compact('months','counts','inquiry'));
+        //get count inquiry
+          $inquiryCount = Inquiry::count();
+          $userCount = User::count();
+
+        return view('admin.index',compact('months','counts','inquiry','inquiryCount','userCount'));
     }
     //logout
     public function AdminLogout(Request $request){

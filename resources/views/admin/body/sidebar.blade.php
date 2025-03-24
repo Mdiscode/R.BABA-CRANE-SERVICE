@@ -127,10 +127,36 @@
             </li>
 
             {{-- end--Company-form-data-- --}}
+
+            {{-- --start-drop-down-list-- side-setting--}}
+            <li class="nav-item nav-category">SIDE-SETTING</li>
+            <li class="nav-item">
+                <a class="nav-link sub-btn" id="sub-btn"  role="button"
+                    aria-expanded="false" aria-controls="emails">
+                    <i class="bi bi-gear-fill"></i> 
+                    <span class="link-title" style="margin-left:8px;">SET-NOW</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="sub-menu hidden">
+                    <ul class="nav sub-menu">
+                        
+                        <li class="nav-item">
+                            <a href="{{route('admin.email.compose')}}" class="nav-link">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.about_list')}}" class="nav-link">ABOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.service')}}" class="nav-link">SERVICE</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{-- --end-drop-down-list--side-setting --}}
             
+            {{-- --start-drop-down-list--EMAIL --}}
             <li class="nav-item nav-category">web apps</li>
             
-            {{-- --start-drop-down-list-- --}}
             <li class="nav-item">
                 <a class="nav-link sub-btn" id="sub-btn"  role="button"
                     aria-expanded="false" aria-controls="emails">
@@ -150,7 +176,7 @@
                     </ul>
                 </div>
             </li>
-            {{-- --end-drop-down-list-- --}}
+            {{-- --end-drop-down-list--EMAIL --}}
 
             {{-- <li class="nav-item">
                 <a href="pages/apps/chat.html" class="nav-link">

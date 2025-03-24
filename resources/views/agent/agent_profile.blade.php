@@ -88,7 +88,7 @@
                 
                 <h6 class="card-title">Profile Update</h6>
       
-                <form class="forms-sample" action="{{url('update_agent_profile')}}" method="post" enctype="multipart/form-data">
+                <form class="forms-sample" action="{{route('update_agent_profile')}}" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="mb-3">
                     <label for="user" class="form-label">Name</label>

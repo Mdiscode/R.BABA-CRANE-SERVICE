@@ -14,10 +14,10 @@
         </div>
           <div class="sm:px-10 px-6">
             <img class="w-24 h-24 flex justify-self-center" src="{{asset('homeimg/staff.png')}}" alt="">
-            Number of Staff <br> <strong>20</strong></div>
+            Number of Staff <br> <strong>{{$staff}}</strong></div>
           <div class="sm:px-10 px-6">
             <img class="w-24 h-24 flex justify-self-center" src="{{asset('homeimg/users.png')}}" alt="">
-            Number of Users <br> <strong>500</strong></div>
+            Number of Users <br> <strong>{{$usercount}}</strong></div>
             <div class="sm:px-20 hidden sm:flex">
                 <img class="w-56 h-40" src="{{asset('slider/hydra.webp')}}" alt="">
             </div>
