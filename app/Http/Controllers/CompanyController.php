@@ -47,11 +47,14 @@ class CompanyController extends Controller
 }
 //--store--locksheet--data----
    public function StoreAddLockSheet(Request $request){
+    // return $request->totalAmount;
+    // die();
     $validate  = $request->validate([
       "name"=>"string|min:3",
       "slipNo"=>"required",
       "inTime"=>"required",
       "outTime"=>"required",
+      "totalAmount"=>'required',
       "workdetail"=>"required|min:4",
       "companyname"=>"required|min:3"
     ]);
@@ -63,6 +66,7 @@ class CompanyController extends Controller
        "inTime"=>$request->inTime,
        "outTime"=>$request->outTime,
        "totalTime"=>$request->totalTime,
+       "totalAmount"=>$request->totalAmount,
        "workdetail"=>$request->workdetail,
        "companyname"=>$request->companyname,
        "gaadino"=>$request->gaadino
@@ -98,11 +102,12 @@ public function UpdateLocksheetData(Request $request){
        "inTime"=>$request->inTime,
        "outTime"=>$request->outTime,
        "totalTime"=>$request->totalTime,
+       "totalAmount"=>$request->totalAmount,
        "workdetail"=>$request->workdetail,
        "companyname"=>$request->companyname,
        "gaadino"=>$request->gaadino
       ]);
-      return redirect()->back()->with('success','Locksheet Update Successfully!');
+      return redirect(route('company.lockSheet-list'))->with('success','Locksheet Update Successfully!');
 }
 //delete--locksheet--
 public function DeleteLocksheetData($id){

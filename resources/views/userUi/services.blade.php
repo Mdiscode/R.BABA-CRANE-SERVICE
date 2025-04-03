@@ -13,9 +13,9 @@
     <div class="container mx-auto px-4 lg:px-20">
     @foreach ($servicesValue as $value)
         {{-- Hydra Crane Services --}}
-        <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6">
+        <div class="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden mt-6 p-6 hover:border-2 hover:border-blue-500 pointer-cursor">
             <div class="w-full lg:w-1/2">
-                <img class="w-full h-60 object-cover rounded-lg" src="{{asset('serviceimg/'.$value->image)}}" alt="Hydra Crane">
+                <img class="transform transition-transform duration-300 hover:scale-110 w-full h-60 object-cover rounded-lg" src="{{asset('serviceimg/'.$value->image)}}" alt="Hydra Crane">
             </div>
             <div class="w-full lg:w-1/2 p-4">
                 <h2 class="text-gray-900 font-bold text-xl">{{$value->title}}</h2>

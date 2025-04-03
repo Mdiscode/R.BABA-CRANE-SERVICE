@@ -7,12 +7,15 @@
     @foreach ($userabout as $value)
         
     
-    <div class="flex justify-center md:flex">
-        <img class="w-full h-60" src="{{ asset('homeimg/'.$value->sphoto) }}" alt="">
-        {{-- <img class="w-full h-60 hidden md:block" src="{{ asset('slider/slide8.jpg') }}" alt=""> --}}
-        {{-- <img class="w-52 h-60 hidden md:block" src="{{ asset('slider/slide3.jpg') }}" alt=""> --}}
-        {{-- <img class="w-full h-60 hidden md:block" src="{{ asset('slider/slide2.jpg') }}" alt=""> --}}
+    <div class="flex justify-center items-center flex-nowrap w-full overflow-hidden">
+        <img class="h-60 flex-1 object-cover" src="{{ asset('serviceimg/'.$value->sphoto) }}" alt="Service Image">
+        <img class="h-60 flex-1 object-cover hidden md:block" src="{{ asset('slider/slide8.jpg') }}" alt="Slider Image 8">
+        {{-- <img class="h-60 w-10 flex-1 object-cover hidden md:block" src="{{ asset('slider/slide3.jpg') }}" alt="Slider Image 3"> --}}
+        <img class="h-60 flex-1 object-cover hidden md:block" src="{{ asset('slider/slide2.jpg') }}" alt="Slider Image 2">
     </div>
+    
+    
+    
 </div>
 
 <!-- Owners Section -->
@@ -21,7 +24,7 @@
         
         <!-- Owner Card 1 -->
         <div class="max-w-sm w-64 rounded overflow-hidden shadow-lg bg-slate-200 ">
-            <img class="w-full h-48" src="{{ asset('homeimg/'.$value->owphoto) }}" alt="Owner Image">
+            <img class="w-full h-48" src="{{ asset('serviceimg/'.$value->owphoto) }}" alt="Owner Image">
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 text-center">OWNER</div>
                 <p class="text-gray-700 text-base text-center">
@@ -40,7 +43,7 @@
 
         <!-- Owner Card 2 -->
         <div class="max-w-sm w-64 rounded overflow-hidden shadow-lg bg-slate-200">
-            <img class="w-full h-48" src="{{ asset('homeimg/'.$value->ad_photo) }}" alt="Owner Image">
+            <img class="w-full h-48" src="{{ asset('serviceimg/'.$value->ad_photo) }}" alt="Owner Image">
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 text-center"> Administrator </div>
                 <p class="text-gray-700 text-base text-center">

@@ -66,7 +66,7 @@ $(document).ready(function () {
 
     if (intime && outtime) {
         const result = calculateTimeDifference(intime, outtime);
-        document.getElementById('totaltime').value = `${result.hours} hours and ${result.minutes} minutes`;
+        document.getElementById('totaltime').value = `${result.hours} H : ${result.minutes} M`;
     } else {
         document.getElementById('totaltime').value = "";
     }

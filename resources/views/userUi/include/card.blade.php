@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3   bg-gray-600  py-1 ">
+<div class="view grid grid-cols-1 md:grid-cols-2 gap-3   bg-gray-600  py-1 ">
   @foreach ($cardData as $cdata )
-<div  class="max-w-sm mx-auto bg-white sm:w-full shadow-lg rounded-lg overflow-hidden md:max-w-2xl m-10 hover:border-2 hover:border-blue-500" >
+<div  class="block max-w-sm mx-auto bg-white sm:w-full shadow-lg rounded-lg overflow-hidden md:max-w-2xl m-10 hover:border-2 hover:border-blue-500" >
 
   <div class="md:flex  bg-white">
     <!-- Image Section -->

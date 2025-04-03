@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h4 class="card-title">Locksheet-list</h4>
                 {{-- <a href="{{route('pdf_generator')}}" class="btn btn-primary">Download PDF</a> --}}
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PDFLockSheetModal">Download PDF </button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PDFLockSheetModal">Generate-Bill PDF </button>
                 <div class="table-responsive pt-3 ">
                     <table class="table table-bordered ">
                         <thead>
@@ -26,6 +26,7 @@
                                 <th>InTime</th>
                                 <th>OutTime</th>
                                 <th>TotalTime</th>
+                                <th>Amount</th>
                                 <th>WordDetail</th>
                                 <th>CompanyName</th>
                                 <th>GaadiNo</th>
@@ -45,6 +46,7 @@
                                 <td>{{$value->inTime}}</td>
                                 <td>{{$value->outTime}}</td>
                                 <td>{{$value->totalTime}}</td>
+                                <td>{{$value->totalAmount}}</td>
                                 <td class="whitespace-pre-wrap">{{$value->workdetail}}</td>
                                 <td>{{$value->companyname}}</td>
                                 <td>{{$value->gaadino}}</td>
@@ -59,7 +61,8 @@
                                         data-bs-date="{{$value->date}}" 
                                         data-bs-intime="{{$value->inTime}}" 
                                         data-bs-outtime="{{$value->outTime}}" 
-                                        data-bs-totaltime="{{$value->totalTime}}" 
+                                        data-bs-totaltime="{{$value->totalTime}}"
+                                        data-bs-totalAmount ="{{$value->totalAmount}}" 
                                         data-bs-workdetail="{{$value->workdetail}}" 
                                         data-bs-target="#viewLockSheetModal">
                                         <i class="bi bi-eye text-primary" style="font-size:1.5rem"></i>
@@ -140,6 +143,10 @@
          <div class="mb-2">
             <label for="name" class="text-sm sm:text-sm md:text-lg lg:text-xl ">TotalTime</label>
             <p id="locTotalTime" class="text-gray-400 cmpValue text-sm sm:text-sm md:text-lg lg:text-xl ">adfc</p>
+           </div>
+           <div class="mb-2">
+            <label for="name" class="text-sm sm:text-sm md:text-lg lg:text-xl ">TotalAmount</label>
+            <p id="totalAmount" class="text-gray-400 cmpValue text-sm sm:text-sm md:text-lg lg:text-xl ">adfc</p>
            </div>
            <div class="mb-2">
             <label for="name" class="text-sm sm:text-sm md:text-lg lg:text-xl ">Work-Detail</label>
@@ -247,9 +254,14 @@
               <label class="form-label" for="start_date">Start Date:</label>
               <input class="form-control text-black bg-white" type="date" name="start_date" required>
             </div>
+
              <div class="m-3">
               <label class="form-label" for="end_date">End Date:</label>
               <input class="form-control text-black bg-white forced-color-adjust-none" type="date" name="end_date" required>
+             </div>
+             <div class="m-3">
+              <label class="form-label" for="end_date">PaymentMode</label>
+              <input  class="form-control text-black bg-white  rounded-sm" type="text" name="paymentMode">
              </div>
              <div class="m-3">
               <label class="form-label" for="end_date">Select Company</label>
@@ -258,8 +270,9 @@
                 <option value="sugna">sugna</option>
                 <option value="marlvare">marlvare</option>
               </select>
+              
              </div>
-              <button class="btn btn-primary" type="submit">Generate PDF</button>
+              <button class="btn btn-primary" type="submit">GenerateBill PDF</button>
           </form>
         </div>
         
@@ -284,6 +297,7 @@
             let inTime = button.getAttribute("data-bs-intime");
             let outTime = button.getAttribute("data-bs-outtime");
             let totalTime = button.getAttribute("data-bs-totaltime");
+            let totalAmount = button.getAttribute("data-bs-totalAmount");
             let workDetail = button.getAttribute("data-bs-workdetail");
 
             // Populate modal with values
@@ -293,6 +307,7 @@
             document.getElementById('locinTime').innerText = inTime;
             document.getElementById('locOutTime').innerText = outTime;
             document.getElementById('locTotalTime').innerText = totalTime;
+            document.getElementById('totalAmount').innerText = totalAmount;
             document.getElementById('locWorkDetail').innerText = workDetail;
         });
     }

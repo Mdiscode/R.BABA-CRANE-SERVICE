@@ -14,6 +14,8 @@ use App\Models\Locksheet;
 use App\Models\User;
 use PDF;
 use App\Models\Operator;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+use NumberFormatter;
 // use Barryvdh\DomPDF\Facade as PDF;
 class UserController extends Controller
 {
@@ -90,13 +92,133 @@ class UserController extends Controller
         $lock = Locksheet::whereBetween('date', [$request->start_date, $request->end_date])
         ->where('companyname',$request->companyname)->get();
             
-            $data = [
-                "title"=>'welcome to R.baba',
-                'date'=>$request->start_date,
-                'locksheet'=>$lock
-            ];
-            $pdf = PDF::loadview('myPDF',compact('lock'));
-            return $pdf->download('locksheet.pdf');
-   
+            
+            // return $lock->pluck('totalTime');
+
+
+
+        ///totalTime
+        // $totalTimeArray = ["6 hours and 37 minutes", "5 hours and 40 minutes"];
+           $totalTimeArray =$lock->pluck('totalTime');
+        $totalHours = 0;
+        $totalMinutes = 0;
+
+        foreach ($totalTimeArray as $time) {
+            preg_match('/(\d+)\s*hours?/', $time, $hoursMatch);
+            preg_match('/(\d+)\s*minutes?/', $time, $minutesMatch);
+
+            $hours = isset($hoursMatch[1]) ? (int)$hoursMatch[1] : 0;
+            $minutes = isset($minutesMatch[1]) ? (int)$minutesMatch[1] : 0;
+
+            // $totalHours += $hours;
+            // $totalMinutes += $minutes;
+
+              // Convert everything to minutes
+           $totalMinutes += ($hours * 60) + $minutes;
+        }
+
+
+        // Convert minutes to hours (round up if 30m or more)
+        // $totalHours += ceil($totalMinutes / 60);
+
+
+        // Convert total minutes back to hours and minutes
+        $totalHours = floor($totalMinutes / 60);  // Get full hours
+        $remainingMinutes = $totalMinutes % 60;   // Get remaining minutes
+        
+        $monthTotalTime = $totalHours.":".$remainingMinutes;
+
+        //-------------totalAmount---------
+        $TotalAmount=$lock->pluck('totalAmount');
+        $Amount =0;
+        foreach ($TotalAmount as $amount){
+            $Amount += $amount;
+        }
+        $TotalAmount = number_format($Amount,2);
+        $GST = ($Amount * 18)/100;
+        $GST2 = number_format($GST,2);
+        $TotalAmountGST = $Amount + $GST;
+        $TotalAmountGST2 = number_format($TotalAmountGST,2);
+        // ----total--amount----end----
+
+        // --------convert--to--nuber-to-text------------
+        function convertNumberToWords($number) {
+            $formatter = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        
+            if ($number >= 100000) {
+                // Extract lakh and remaining amount
+                $lakhValue = floor($number / 100000); // Get full lakhs
+                $remaining = $number % 100000; // Get remaining amount below 1 lakh
+        
+                $words = ucfirst($formatter->format($lakhValue)) . " lakh";
+                
+                // If there is a remaining amount, convert it and append
+                if ($remaining > 0) {
+                    $words .= " " . $formatter->format($remaining) . " rupees";
+                } else {
+                    $words .= " only";
+                }
+                
+                return $words;
+            } else {
+                // Convert to rupees format
+                return ucfirst($formatter->format($number)) . " rupees only";
+            }
+        }
+        
+        // Example Usage
+        $TotalAmountGST = $TotalAmountGST;  
+        $amountInWords = convertNumberToWords($TotalAmountGST);
+        //   --------convert---to---number--to---text---End-----
+
+        //-------work---detail----------
+        // $itemName = $lock->pluck('workdetail');
+        $itemName = $lock[0]->workdetail;
+        //-------end---work----detial----
+
+        // ---------CGST-Amount---------
+        $CGST = ($Amount * 9)/100;
+        $CGSTAmount = number_format($CGST,2);
+        
+        //SGST
+        $SGST = ($Amount * 9)/100;
+        $SGSTAmount = number_format($SGST,2);
+
+        //Total--Tax
+           $total =($CGST + $SGST);
+           $TotalTax = number_format($total);
+        // ---------CGST-Amount---------
+          $paymentMode=isset($request->paymentMode) ?$request->paymentMode : "";
+        $data = [
+            "invoiceNo"=>rand(103,403),
+            "company" => $lock->isNotEmpty() ? $lock[0]->companyname : null,
+            "itemName"=>$itemName,
+            "totalTime"=>$monthTotalTime,
+            "Amount"=>$TotalAmount,
+            "GST"=>$GST2,
+            "TotalAmountGST"=>$TotalAmountGST2,
+            "CGST"=>$CGSTAmount,
+            "SGST"=>$SGSTAmount,
+            "TotalTax"=>$TotalTax,
+            "amountInWords"=>$amountInWords,
+            'date'=>$request->start_date,
+            'paymentMode'=> $paymentMode,
+            // 'locksheet'=>$lock
+
+        ];
+        // return response()->json($data);
+
+
+        // ----------gentrate-PDF------ 
+                    SnappyPdf::setBinary('"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"');
+
+            $pdf = SnappyPdf::loadView('myPDF', compact('data'));
+                        // ->setPaper('a4')
+                        // ->setOption('margin-top', 10)
+                        // ->setOption('margin-right', 10)
+                        // ->setOption('margin-bottom', 10)
+                        // ->setOption('margin-left', 10);
+
+        return $pdf->download('invoice.pdf');
         }
 }

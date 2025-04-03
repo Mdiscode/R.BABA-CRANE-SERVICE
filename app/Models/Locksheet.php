@@ -14,6 +14,7 @@ class Locksheet extends Model
         "inTime",
         "outTime",
         "totalTime",
+        "totalAmount",
         "workdetail",
         "companyname",
         "gaadino"

@@ -19,7 +19,23 @@
         
     {{-- //jquery--- --}}
     <script src="{{asset('assets/jquery/jquery.js')}}"></script>
-
+<style>
+  .block{
+    animation: appear linear;
+    animation-timeline:view();
+  }
+  @keyframes appear{
+    from {
+      oopacity : 0;
+      scale: 0.5;
+    }
+    to{
+      opacity: 1;
+      scale: 1.2;
+    }
+  }
+  
+</style>
 </head>
 
 

@@ -55,6 +55,11 @@
                     <span style="color:red;">{{$errors->first('totalTime')}}</span>
                   </div>
                   <div class="mb-3">
+                    <label for="totalAmount" class="form-label">TotalAmount</label>
+                    <input id='totalAmount' type="text" class="form-control  bg-gray-700"   placeholder="Total-Amount" name="totalAmount" value="{{$editLocksheet->totalAmount}}">
+                    <span style="color:red;">{{$errors->first('totalAmount')}}</span>
+                  </div>
+                  <div class="mb-3">
                     <label for="work-detail" class="form-label">Work-Detail</label>
                     <input type="text" class="form-control  bg-gray-700"   placeholder="Work-Detail" name="workdetail" value="{{$editLocksheet->workdetail}}">
                     <span style="color:red;">{{$errors->first('workdetail')}}</span>
