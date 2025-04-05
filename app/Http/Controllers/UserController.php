@@ -16,6 +16,9 @@ use PDF;
 use App\Models\Operator;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use NumberFormatter;
+use App\Models\Invoice;
+use Twilio\Rest\Client;
+
 // use Barryvdh\DomPDF\Facade as PDF;
 class UserController extends Controller
 {
@@ -75,27 +78,46 @@ class UserController extends Controller
             $save->phone = trim($request->phone);
             $savedb = $save->save();
 
+            $adminEmail = User::where('role','admin')->first();
+        
             if($savedb){
-                Mail::to('israrshekh.code22@gmail.com')->send(new InquiryMail($save));
+                Mail::to($adminEmail->email)->send(new InquiryMail($save));
             }
-               // Send Email to Admin
+
+            ///----send--SMS-----to-----user-------
+            try{
+                    $ac_sid=env('TWILIO_SID');
+                    $token = env('TWILIO_AUTH_TOKEN');
+                    $number = env('TWILIO_NUMBER');
+                    $client = new Client($ac_sid,$token);
+                    $client->messages->create('+91'.$request->phone,[
+                        'from'=>$number,
+                        'body' => "
+                            Thanks for your inquiry with R. Baba Crane Services We'll contact you soon. We Serve (".$request->inquiry. ") & nearby areas.Call us for urgent help: {$adminEmail->phone}
+                        "
+
+                    ]);
+        
+                    // return "hello";
+                }catch(\Exception $th){
+                    console.log($th);
+                }
+            ///----send--SMS-----to-----user---End----
+
             return redirect()->back()->with("success","Inqueiry is Successfully");
 
 
         }
       //GET inquiry---detail
         //-----End--INQUIRY------
-        //generate pdf
+    
+        // ----------------Start--GENERATE-INVOICE---------------------
         public function download_pdf(Request $request){
             
                         // Fetch records between the selected dates
         $lock = Locksheet::whereBetween('date', [$request->start_date, $request->end_date])
         ->where('companyname',$request->companyname)->get();
             
-            
-            // return $lock->pluck('totalTime');
-
-
 
         ///totalTime
         // $totalTimeArray = ["6 hours and 37 minutes", "5 hours and 40 minutes"];
@@ -116,11 +138,6 @@ class UserController extends Controller
               // Convert everything to minutes
            $totalMinutes += ($hours * 60) + $minutes;
         }
-
-
-        // Convert minutes to hours (round up if 30m or more)
-        // $totalHours += ceil($totalMinutes / 60);
-
 
         // Convert total minutes back to hours and minutes
         $totalHours = floor($totalMinutes / 60);  // Get full hours
@@ -172,7 +189,6 @@ class UserController extends Controller
         //   --------convert---to---number--to---text---End-----
 
         //-------work---detail----------
-        // $itemName = $lock->pluck('workdetail');
         $itemName = $lock[0]->workdetail;
         //-------end---work----detial----
 
@@ -189,8 +205,14 @@ class UserController extends Controller
            $TotalTax = number_format($total);
         // ---------CGST-Amount---------
           $paymentMode=isset($request->paymentMode) ?$request->paymentMode : "";
+
+          $lastInvoice = Invoice::orderBy('id','desc')->first();
+        //   return $lastInvoice;
+        $nextNumber = $lastInvoice ? ((int)$lastInvoice->invoice_no + 1) : 1;
+        $formatterNo = str_pad($nextNumber,3,'0',STR_PAD_LEFT);
+        // return $formatterNo;
         $data = [
-            "invoiceNo"=>rand(103,403),
+            "invoiceNo"=> $formatterNo,
             "company" => $lock->isNotEmpty() ? $lock[0]->companyname : null,
             "itemName"=>$itemName,
             "totalTime"=>$monthTotalTime,
@@ -203,10 +225,23 @@ class UserController extends Controller
             "amountInWords"=>$amountInWords,
             'date'=>$request->start_date,
             'paymentMode'=> $paymentMode,
-            // 'locksheet'=>$lock
-
         ];
-        // return response()->json($data);
+        
+        // ----------Store-----invoice--data---------
+         
+        if($data){
+            $invoice = Invoice::create([
+                "invoice_no"=>$data['invoiceNo'],
+                "company_name"=>$data['company'],
+                "itemName"=>$data['itemName'],
+                "totalTime"=>$data['totalTime'],
+                "TotalAmount"=>$data['Amount'],
+                "TotalAmountGST"=>$data['TotalAmountGST'],
+                "paymentMode"=>$data['paymentMode'],
+            ]);
+        }
+        
+        // ----------Store-----invoice--data----End-----
 
 
         // ----------gentrate-PDF------ 
@@ -218,7 +253,19 @@ class UserController extends Controller
                         // ->setOption('margin-right', 10)
                         // ->setOption('margin-bottom', 10)
                         // ->setOption('margin-left', 10);
+         
 
-        return $pdf->download('invoice.pdf');
+            if($pdf){
+                // $filePath = 'invoices/invoice-' .$formatterNo. '.pdf';
+                // $pdf->save(storage_path('app/public/' . $filePath));
+                return $pdf->download('invoice'.$formatterNo.'.pdf');
+            }
+
+        // ----------------END--GENERATE-INVOICE---------------------
         }
+
+        
+
+
+
 }

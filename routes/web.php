@@ -10,6 +10,7 @@ use App\Http\controllers\EmailController;
 use App\Http\controllers\OperatorController;
 use App\Http\controllers\CompanyController;
 use App\Http\controllers\ServiceController;
+use App\Http\controllers\SmsController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -176,5 +177,6 @@ Route::get('user/about',[ServiceController::class,'get_About'])->name('user.abou
 // });
 
 
+Route::get('sms/',[SmsController::class,'sendSmsToUser']);
 
 
