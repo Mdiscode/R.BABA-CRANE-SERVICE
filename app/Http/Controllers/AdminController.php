@@ -18,6 +18,7 @@ use App\Models\Operator;
 use App\Models\ComposeEmail;
 class AdminController extends Controller
 {
+    
     public function AdminDashboard(){
         $user = User::selectRaw('count(id) as count,DATE_FORMAT(created_at,"%Y-%m") as month')
         ->groupBy('month')->orderBy('month','asc')->get();
@@ -26,11 +27,12 @@ class AdminController extends Controller
         $counts = $user->pluck('count');
 
           //get inquiry--details
-          $inquiry = Inquiry::get();
+          $inquiry = Inquiry::paginate(7);
         //get count inquiry
           $inquiryCount = Inquiry::count();
           $userCount = User::count();
 
+          
         return view('admin.index',compact('months','counts','inquiry','inquiryCount','userCount'));
     }
     //logout
@@ -156,10 +158,10 @@ class AdminController extends Controller
     public function Update_CardData(Request $request){
         $validate = $request->validate([
             "title"=>"required|min:3",
-            "description"=>"required|min:5|max:100|string",
+            "description"=>"required|min:5|max:250|string",
             "location"=>"required|min:3",
             "phone"=>"required|min:10|regex:/^[0-9]+$/",
-            "image"=>"required"
+            // "image"=>"required"
         ]);
         // --get cardData--from-table--
         $cardData = CardContent::find($request->id);

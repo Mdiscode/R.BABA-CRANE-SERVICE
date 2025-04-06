@@ -19,7 +19,7 @@
         
     {{-- //jquery--- --}}
     <script src="{{asset('assets/jquery/jquery.js')}}"></script>
-<style>
+{{-- <style>
   .block{
     animation: appear linear;
     animation-timeline:view();
@@ -35,7 +35,11 @@
     }
   }
   
-</style>
+</style> --}}
+<!-- In your Blade <head> section -->
+  {{-- <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script> --}}
+  
 </head>
 
 

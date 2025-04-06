@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Locksheet;
 use File;
+use App\Models\Invoice;
 class CompanyController extends Controller
 {
     // ------Company--controller--start---
@@ -115,4 +116,15 @@ public function DeleteLocksheetData($id){
     return redirect()->back()->with('success','Locksheet Delete Successfully');
 }
     //-----END--LOCKSHEET---RECORD------------
+
+    // ------------Invoice---list--------
+    function ViewInvoice(){
+
+       $invoice = Invoice::paginate(8);
+       return view('admin/company/invoice_list',compact('invoice'));
+    }
+    function DelelteInvoice($id){
+      $invo = Invoice::find($id)->delete();
+      return redirect()->back()->with('success',"Invoice is Delelted Successfully!");
+    }
 }

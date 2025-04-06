@@ -17,6 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
         'role'=>Role::class,
         'role'=>Role::class
        ]);
+
+       $middleware->web(append:[
+         App\Http\Middleware\LocalizationMiddleware::class,
+       ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

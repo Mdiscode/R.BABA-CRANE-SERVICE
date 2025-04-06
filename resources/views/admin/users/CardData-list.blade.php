@@ -39,7 +39,7 @@
                                             </td>
 
                                             <td>{{ $value->title }}</td>
-                                            <td class="whitespace-pre-wrap break-words w-[30ch]">{{ $value->description }}
+                                            <td class="whitespace-pre-wrap break-words w-[30ch]">{!! $value->description !!}
                                             </td>
                                             <td>{{ $value->location }}</td>
                                             <td><a href="tel:{{ $value->phoneNo }}">{{ $value->phoneNo }}</a></td>
@@ -88,7 +88,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="UpdateCardDataLabel">View LockSheet Detail</h5>
+          <h5 class="modal-title" id="UpdateCardDataLabel">View Card Detail</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="about" class="form-label">Description</label>
-                  <textarea class="form-control  bg-gray-700" name="description" id="desc" ></textarea>
+                  <textarea class="form-control  bg-gray-700 h-28" name="description" id="desc" ></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="location" class="form-label">Location</label>

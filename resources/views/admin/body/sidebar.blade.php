@@ -16,7 +16,7 @@
             <li class="nav-item">
                 <a href="{{route('admin.dashboard')}}" class="nav-link">
                     <i class="bi bi-person-fill-gear text-xl"></i>
-                    <span class="link-title" style="margin-left:8px;">Dashboard</span>
+                    <span class="link-title" style="margin-left:8px;">@lang('message.dashboard')</span>
                 </a>
             </li>
             <li class="nav-item nav-category">Role</li>            
@@ -29,7 +29,7 @@
                                 aria-expanded="false" aria-controls="emails">
                                 {{-- <i class="link-icon" data-feather="box"></i> --}}
                                 <i class="bi bi-file-plus-fill text-xl"></i> 
-                        <span class="link-title ml-5" style="margin-left:8px;" >Add & list Card</span>
+                        <span class="link-title ml-5" style="margin-left:8px;" >@lang('message.Add_list_card')</span>
                                 <i class="link-arrow" data-feather="chevron-down"></i>
                             </a>
                             <div class="sub-menu hidden">
@@ -125,7 +125,12 @@
                     </ul>
                 </div>
             </li>
-
+            <li class="nav-item">
+                <a href="{{route('company.invoice-list')}}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title" >List-Invoice</span>
+                </a>
+            </li>
             {{-- end--Company-form-data-- --}}
 
             {{-- --start-drop-down-list-- side-setting--}}

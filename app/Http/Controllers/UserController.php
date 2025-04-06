@@ -90,17 +90,23 @@ class UserController extends Controller
                     $token = env('TWILIO_AUTH_TOKEN');
                     $number = env('TWILIO_NUMBER');
                     $client = new Client($ac_sid,$token);
-                    $client->messages->create('+91'.$request->phone,[
-                        'from'=>$number,
-                        'body' => "
-                            Thanks for your inquiry with R. Baba Crane Services We'll contact you soon. We Serve (".$request->inquiry. ") & nearby areas.Call us for urgent help: {$adminEmail->phone}
-                        "
+                    // $client->messages->create('+91'.$request->phone,[
+                    //     'from'=>$number,
+                    //     'body' => "
+                    //         Thanks for your inquiry with R. Baba Crane Services We'll contact you soon. We Serve (".$request->inquiry. ") & nearby areas.Call us for urgent help: {$adminEmail->phone}
+                    //     "
 
+                    // ]);
+
+                    //  2. Send SMS to the admin
+                    $client->messages->create('+91' .$adminEmail->phone, [
+                        'from' => $number,
+                        'body' => "New inquiry : {$request->name}, Phone: {$request->phone}, inquiry: {$request->inquiry}"
                     ]);
         
                     // return "hello";
-                }catch(\Exception $th){
-                    console.log($th);
+                }catch(Exception $e){
+                    console.log($e);
                 }
             ///----send--SMS-----to-----user---End----
 

@@ -11,6 +11,7 @@ use App\Http\controllers\OperatorController;
 use App\Http\controllers\CompanyController;
 use App\Http\controllers\ServiceController;
 use App\Http\controllers\SmsController;
+use App\Http\controllers\LocaleController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -38,7 +39,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('admin/profile','admin_profile');
     //update profile
     Route::post('admin_profile/update','admin_profile_update');
-
+      // -----locale-------
+Route::get('admin/locale/{lang}',[LocaleController::class,'setLocale']);
     // ---start-route-group--
     Route::prefix('admin/users')->group(function(){
      //admin user list
@@ -83,6 +85,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     //    -----view-----
         Route::get('/company/viewCompany/','ViewCompany')->name('company.CompanyList');
         Route::get('/company/viewLockSheet','ViewLockSheet')->name('company.lockSheet-list');
+        Route::get('/company/viewInvoice','ViewInvoice')->name('company.invoice-list');
+        Route::get('/company/deleteInvoice/{id}','DelelteInvoice')->name('deleteInvoice');
+
         
         // -----store--company--data----
       Route::post('/company/addCompany','StoreAddCompany')->name('company.StoreCompany');

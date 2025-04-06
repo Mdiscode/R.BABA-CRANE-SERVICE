@@ -22,6 +22,6 @@
             alertBox.style.opacity = "0";
             setTimeout(() => alertBox.remove(), 500); // Remove from DOM after fading
         }
-    }, 3000); // 5000ms = 5 seconds
+    }, 5000); // 5000ms = 5 seconds
 </script>
 
