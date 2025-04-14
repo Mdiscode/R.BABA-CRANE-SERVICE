@@ -20,13 +20,13 @@
                 id="close-icon" onclick="Close(this)"></ion-icon>
             <li
                 class="mx-4 text-white md:text-white  my-6 md:my-0   hover:text-orange-500  text-xl  p-2 hover:rounded">
-                <a href="/">{{__('message.home')}}</a></li>
+                <a href="/">{{__('userMsg.home')}}</a></li>
             <li
                 class="mx-4 text-white md:text-white my-6 md:my-0  hover:text-orange-500     text-xl  p-2 hover:rounded">
-                <a href="{{route('user.about')}}">{{__('message.about')}}</a></li>
+                <a href="{{route('user.about')}}">{{__('userMsg.about')}}</a></li>
             <li
                 class="mx-4  text-white md:text-white my-6 md:my-0 hover:text-orange-500       text-xl   p-2 hover:rounded">
-                <a href="{{route('user.services')}}">{{__('message.service')}}</a></li>
+                <a href="{{route('user.services')}}">{{__('userMsg.service')}}</a></li>
             
         </ul>
 
@@ -52,13 +52,13 @@
                         <a href="{{url('admin/locale/hi')}}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem">Hindi</a>
-                        <a href="/setlang/en"
+                        <a href="{{url('admin/locale/en')}}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem">English</a>
-                        <a href="/setlang/gu"
+                        <a href="{{url('admin/locale/en')}}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem">gujrati</a>
-                        <a href="#"
+                        <a href="{{url('admin/locale/mn')}}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem">Marathi</a>
                     </div>
@@ -98,7 +98,6 @@
             <div class="relative inline-block text-left w-10 h-15 right-12 ">
                 <!-- Dropdown Button -->
                     <button id="dropdownProfile" class="w-15 h-15 rounded-full cursor-pointer text-white" >Login</button>
-                <!-- Dropdown Menu -->
                 <div id="dropdownMenu2"
                     class="w-20 hidden absolute right-0 z-10 mt-2  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ">
                     <div class="p-3" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton" >

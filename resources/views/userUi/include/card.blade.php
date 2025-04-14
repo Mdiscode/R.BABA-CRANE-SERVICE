@@ -116,7 +116,7 @@
       <div class="mt-4 flex items-center justify-around">
 
       <button id="openinquiryModel" data-modal-target="#inquiryModel" class="p-3 bg-orange-500 text-white rounded hover:bg-orange-600 focus:outline-none flex items-center">
-        SEND INQUIRY
+        @lang('userMsg.inquiry')
     </button>
         <a href="https://wa.me/9026018381" class="ml-2 px-2 py-2 bg-white text-black rounded hover:bg-green-600 hover:text-white  flex items-center  shadow-lg border-[3px] ">
           <img src="{{asset('cardimg/whatsapp2.png')}}" class="h-8 w-8 mr-2 hover:text-white" alt="WhatsApp">

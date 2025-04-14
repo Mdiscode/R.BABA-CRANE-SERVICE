@@ -53,6 +53,7 @@
                                 <th>Phone</th>
                                 {{-- <th>Website</th> --}}
                                 <th>Address</th>
+                                <th>CompanyName</th>
                                 <th>Role</th>
                                 <th>Status</th>
                                 <th>Created At</th>
@@ -78,6 +79,7 @@
                                     <td>{{$value->email}}</td>
                                     <td class="whitespace-nowrap">{{$value->phone}}</td>
                                     <td>{{$value->address}}</td>
+                                    <td>{{$value->companyname}}</td>
                                     <td>
                                         @if ($value->role == 'admin')
                                             <span class="badge bg-info">Admin</span>
@@ -96,9 +98,9 @@
                                     </td>
                                     <td class="whitespace-nowrap">{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                                     <td>
-                                        <button data-modal-target="#userlistModal" style="font-size:1.5rem">
+                                        {{-- <button data-modal-target="#userlistModal" style="font-size:1.5rem">
                                             <i class="bi bi-pencil-square text-primary"></i> 
-                                        </button>
+                                        </button> --}}
                                         <a href="{{ route('deleteRole', $value->id) }}" onclick="return confirm('Are you sure you want to delete!')" style="font-size:1.5rem">
                                             <i class="bi bi-trash text-danger"></i>
                                         </a>

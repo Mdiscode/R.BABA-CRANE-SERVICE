@@ -39,8 +39,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('admin/profile','admin_profile');
     //update profile
     Route::post('admin_profile/update','admin_profile_update');
-      // -----locale-------
-Route::get('admin/locale/{lang}',[LocaleController::class,'setLocale']);
+//       // -----locale-------
+// Route::get('admin/locale/{lang}',[LocaleController::class,'setLocale']);
     // ---start-route-group--
     Route::prefix('admin/users')->group(function(){
      //admin user list
@@ -184,4 +184,5 @@ Route::get('user/about',[ServiceController::class,'get_About'])->name('user.abou
 
 Route::get('sms/',[SmsController::class,'sendSmsToUser']);
 
-
+      // -----locale-------
+Route::get('admin/locale/{lang}',[LocaleController::class,'setLocale']);
